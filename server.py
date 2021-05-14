@@ -17,5 +17,4 @@ def base_path():
         "=> Temp: {}".format(s2['temp']),
         "=> Moist: {}".format(s2['moisture']),
     ]
-    print('\n'.join(msg_lines))
     return "<br>".join(msg_lines)
