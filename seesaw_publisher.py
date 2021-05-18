@@ -1,7 +1,6 @@
-""" SeeSaw Sampler 
+""" SeeSaw Publisher
 
-This module samples the SeeSaw sensors periodically and averages the values 
-over N samples (defined by NUMBER_OF_SAMPLES)
+Reads the sensor and publishes the values periodically.
 
 """
 
