@@ -1,2 +1,2 @@
-# plantita
+# plantita 🪴
 Internet of Plants
