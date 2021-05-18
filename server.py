@@ -1,9 +1,13 @@
 from flask import Flask, render_template
-import seesaw
-import dht_subscriber
+from subscriber import Subscriber
 
-seesaw.start()
-dht_subscriber.start()
+dht = Subscriber(port=10555)
+dht.start()
+
+seesaw1 = Subscriber(port=10655)
+seesaw1.start()
+
+print('Starting')
 
 app = Flask(__name__,
         static_url_path='',
@@ -15,10 +19,8 @@ def index():
 
 @app.route('/data/')
 def data():
-    s1, s2 = seesaw.get_values()
-    dht_data = dht_subscriber.get_dht_values()
     data = {
-            'sensor2': s2,
-            'dht': dht_data,
+            'seesaw1': seesaw1.get_values(),
+            'dht': dht.get_values(),
         }
     return data
