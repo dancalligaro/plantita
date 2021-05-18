@@ -20,7 +20,9 @@ interval = 5.0 # Seconds
 port = 10555
 context = zmq.Context()
 socket = context.socket(zmq.PUB)
-socket.bind("tcp://localhost:%s" % port)
+socket_addr = "tcp://127.0.0.1:%s" % port
+print("DHT publishing on {}".format(socket_addr))
+socket.bind(socket_addr)
 
 while True:
     try:
@@ -30,6 +32,7 @@ while True:
         data = {
                 "temp": temperature_c,
                 "humidity": humidity,
+                "time": int(time.time() * 1000),
         }
         msg = json.dumps(data)
         print("This is the msg: {}".format(msg))
