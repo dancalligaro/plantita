@@ -4,8 +4,9 @@ import threading
 
 class Subscriber:
 
-    def __init__(self, port):
+    def __init__(self, port, cb=None):
         self.values = None
+        self.cb = None
         self.port = port
 
         self.context = zmq.Context()
@@ -20,8 +21,11 @@ class Subscriber:
     def read(self):
         while True:
             msg = self.socket.recv_string()
-            print("Port {} Received {}".format(self.port, msg))
+            # print("Port {} Received {}".format(self.port, msg))
             self.values = json.loads(msg)
+
+            if self.cb:
+                self.cb(self.values)
 
     def start(self, daemon=True):
         # Start it non-blocking on a different thread
